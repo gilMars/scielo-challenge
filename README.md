@@ -3,7 +3,8 @@
 
 Para executar o projeto é necessário que tenha instalado as seguites ferramentas:
 
-- Docker e docker-compose
+- Docker
+- docker-compose
 
 ## Como executar o projeto
 `docker-compose up -d`
