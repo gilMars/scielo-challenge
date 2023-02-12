@@ -1,8 +1,25 @@
 services:
+  db:
+    container_name: challenge_db
+    image: postgres
+    restart: always
+    network_mode: host
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   web:
     build: .
     container_name: challenge
-    ports:
-      - "8000:8000"
+    network_mode: host
+    env_file:
+      - .env
     volumes:
       - .:/project
+    depends_on:
+      db:
+        condition: service_healthy
